@@ -24,12 +24,12 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=25)
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $email;
 
@@ -42,8 +42,6 @@ class User implements UserInterface, \Serializable
     {
         $this->isActive = true;
     }
-
-
 
     public function getId(): ?int
     {
@@ -96,5 +94,31 @@ class User implements UserInterface, \Serializable
         $this->isActive = $isActive;
 
         return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize(array($this->id, $this->username, $this->password));
+    }
+
+    public function unserialize($serialized)
+    {
+        list($this->id, $this->username, $this->password,) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
