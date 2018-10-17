@@ -38,6 +38,8 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    private $plainPassword;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -120,5 +122,21 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 }
