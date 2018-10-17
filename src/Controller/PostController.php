@@ -53,6 +53,14 @@ class PostController extends AbstractController
         ));
     }
 
+    /**
+    * @Route("/admin")
+    */
+    public function admin()
+    {
+      return new Response('<html><body>Admin page!</body></html>');
+    }
+
 
 
     /**
